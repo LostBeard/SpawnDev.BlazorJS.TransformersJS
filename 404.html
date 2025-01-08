@@ -26,7 +26,23 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+
+    <!-- autostart is set to false so we can detect SIMD support and load the appropriate build -->
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <!--
+        WASM Feature Detect - from GoogleChromeLabs
+        CDN UMD Version: https://unpkg.com/wasm-feature-detect/dist/umd/index.js
+        Repo: https://github.com/GoogleChromeLabs/wasm-feature-detect
+    -->
+    <script webworker-enabled src="wasm-feature-detect.1.8.0.js"></script>
+    <!--
+        The below script tag is used to detect SIMD support on the running device and load the appropriate build
+        If SIMD is not supported it loads _frameworkCompat/ instead of _framework/
+    -->
+    <script webworker-enabled src="blazor.loader.js"></script>
+
 </body>
 
 </html>
