@@ -1,3 +1,8 @@
+/* /Components/AnaglyphImage.razor.rz.scp.css */
+.anaglyph-image[b-kb9xwiktks] {
+    max-width: 100%;
+    max-height: 100%;
+}
 /* /Layout/AppTray/AppTrayArea.razor.rz.scp.css */
 
 .app-tray-area[b-mh1m0vceps] {
@@ -114,9 +119,4 @@ main[b-bv3w59fens] {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
-}
-/* /Pages/AnaglyphImage.razor.rz.scp.css */
-.anaglyph-image[b-xweh6dp91g] {
-    max-width: 100%;
-    max-height: 100%;
 }
