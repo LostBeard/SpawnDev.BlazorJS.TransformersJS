@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SpawnDev.BlazorJS.TransformersJS.Demo",
   "resources": {
-    "hash": "sha256-FwjE7g86c+9bEt+u70vvFJRJJpA2hruiIXTJXZnOvTw=",
+    "hash": "sha256-r0PAd1eUD7vsGcsHxYLxNCS2fuOFv7GCJKB9Bs26nPM=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-0DyBATDg4x72zM0xPLoKkcvwGqbc+wsDMxvZYsH0dVk="
     },
@@ -84,8 +84,8 @@
       "System.Xml.XDocument.wasm": "sha256-oQ/Ax8f00dmONc0qN7uEoHkUGKbdJpDS7JZI65G95Jo=",
       "System.wasm": "sha256-pAY9GZZ7nipBlYcbrQukH9oxvgW24CQewcWTkItVHOs=",
       "System.Private.CoreLib.wasm": "sha256-Zy+nH3iSxa0VvnD+elbpIKQuqsWpaw5fqDBmFkf7Lo8=",
-      "SpawnDev.BlazorJS.TransformersJS.wasm": "sha256-IRhpv96mafRe/QUGN741lYQCrE0NAwjAA5KWBn1LLCU=",
-      "SpawnDev.BlazorJS.TransformersJS.Demo.wasm": "sha256-T9E3wlX4boNHom/on3pzZg/jIuWO3IvzxXHa5RrdAAg="
+      "SpawnDev.BlazorJS.TransformersJS.wasm": "sha256-PwzdXwylGLbT/HQRnknSL1YrQHn5yVMS3pzjFoeD0QM=",
+      "SpawnDev.BlazorJS.TransformersJS.Demo.wasm": "sha256-I2jeEhQTaB9OfATWU9ARFPha/FqvZFlPZ6+ncYBscOQ="
     },
     "libraryInitializers": {
       "SpawnDev.BlazorJS.1kohsulca1.lib.module.js": "sha256-b0WR5Fb08OK+FgLPLG33kE1Pca2blPel5Q4FZnjb5W0="
