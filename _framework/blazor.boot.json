@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SpawnDev.BlazorJS.TransformersJS.Demo",
   "resources": {
-    "hash": "sha256-rahzL72sUP/d9JFO/5kYgAh2WrJk/QrfhjyU+hlwpEk=",
+    "hash": "sha256-oFrifKR0+/XuPwviV+Ibzpjpic2n3K9NNr8GlJkhK9Y=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-0DyBATDg4x72zM0xPLoKkcvwGqbc+wsDMxvZYsH0dVk="
     },
@@ -34,7 +34,7 @@
       "Microsoft.JSInterop.wasm": "sha256-jWTguIuWjF54ftF3yU21RAI+o0MoG7DGdDEqSkViELo=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-ohwfdd8sZzTEHObZdmOGR9D4n2K6kspCJmHpSHevlCQ=",
       "Radzen.Blazor.wasm": "sha256-suJtLNy//qAerYQ23f19kwLEB1q75oPoJzh3yYSfsxA=",
-      "SpawnDev.BlazorJS.wasm": "sha256-sM82Rj8QA6tyXT4rfHmuEvx06EIigN5ziAS/HyfCFzg=",
+      "SpawnDev.BlazorJS.wasm": "sha256-bwUqKBhhEcR0MQTAvZmsBh9Zx1vIKG0r5Z6aZXrJh7U=",
       "SpawnDev.BlazorJS.MultiView.wasm": "sha256-IN2EX1y6zxtva6VQEBvmv/0Zu8Ay91R+BsDC3NWyiq8=",
       "SpawnDev.BlazorJS.WebWorkers.wasm": "sha256-pMrpQgYHDgp4zNTKhNTD1QUwhjhII1srLv8uY9orfdo=",
       "System.Linq.Dynamic.Core.wasm": "sha256-zY4O55eQ9gC1F0jl4MFsfpX6oCP3eabUwmK1PIrgx3Q=",
@@ -85,8 +85,8 @@
       "System.Xml.XDocument.wasm": "sha256-oQ/Ax8f00dmONc0qN7uEoHkUGKbdJpDS7JZI65G95Jo=",
       "System.wasm": "sha256-pAY9GZZ7nipBlYcbrQukH9oxvgW24CQewcWTkItVHOs=",
       "System.Private.CoreLib.wasm": "sha256-Zy+nH3iSxa0VvnD+elbpIKQuqsWpaw5fqDBmFkf7Lo8=",
-      "SpawnDev.BlazorJS.TransformersJS.wasm": "sha256-d3+IIfgUMgTm8RVmzWWtNfRMLzEM/8dpGq3QSa2mafg=",
-      "SpawnDev.BlazorJS.TransformersJS.Demo.wasm": "sha256-vuPCVXi4OFbgmlkEUqkr8xIKHil/K2Jxlm8Pf+GQY14="
+      "SpawnDev.BlazorJS.TransformersJS.wasm": "sha256-sCMHWVMIdJIpMbRLsBLtkNeqTrTghFpaE+4XKtytE0M=",
+      "SpawnDev.BlazorJS.TransformersJS.Demo.wasm": "sha256-OgoGVeRkTcENlKkSEFxYHfx7m/0L+GCDV0i6acj/LAA="
     },
     "libraryInitializers": {
       "SpawnDev.BlazorJS.1kohsulca1.lib.module.js": "sha256-b0WR5Fb08OK+FgLPLG33kE1Pca2blPel5Q4FZnjb5W0="
