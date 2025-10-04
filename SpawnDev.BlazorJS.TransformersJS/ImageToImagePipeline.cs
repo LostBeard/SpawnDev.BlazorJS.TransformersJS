@@ -5,6 +5,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
     /// <summary>
     /// Image to Image pipeline using any `AutoModelForImageToImage`. This pipeline generates an image based on a previous image input.<br/>
     /// https://huggingface.co/docs/transformers.js/api/pipelines#pipelinesimagetoimagepipeline<br/>
+    /// https://huggingface.co/docs/transformers.js/api/pipelines#module_pipelines.ImageToImagePipeline
     /// </summary>
     public class ImageToImagePipeline : Pipeline
     {
