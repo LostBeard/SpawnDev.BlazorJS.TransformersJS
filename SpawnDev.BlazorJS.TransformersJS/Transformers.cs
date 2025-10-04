@@ -117,6 +117,15 @@ namespace SpawnDev.BlazorJS.TransformersJS
             => Pipeline<DepthEstimationPipeline>("depth-estimation", model, pipelineOptions);
 
         /// <summary>
+        /// Create a new image-to-image pipeline
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="pipelineOptions"></param>
+        /// <returns></returns>
+        public Task<ImageToImagePipeline> ImageToImagePipeline(string? model = null, PipelineOptions? pipelineOptions = null)
+            => Pipeline<ImageToImagePipeline>("image-to-image", model, pipelineOptions);
+
+        /// <summary>
         /// Returns the version of the transformers.js library
         /// </summary>
         public static string? Version => JS.Get<string>($"{GlobalModuleName}.env.version");

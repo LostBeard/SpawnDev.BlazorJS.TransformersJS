@@ -11,6 +11,9 @@ namespace SpawnDev.BlazorJS.TransformersJS
     public class RawImage : JSObject
     {
         #region static properties
+        /// <summary>
+        /// 
+        /// </summary>
         public static int Length => JS.Get<int>("Transformers.RawImage.length");
         #endregion
         #region static methods
@@ -101,8 +104,25 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <param name="height">The height of the image.</param>
         /// <param name="channels">The number of channels.</param>
         public RawImage(byte[] data, int width, int height, int channels) : base(JS.New("Transformers.RawImage", data, width, height, channels)) { }
-
+        /// <summary>
+        /// Returns the size of the image (width, height).
+        /// </summary>
         public (int width, int height) Size => JSRef!.Get<(int width, int height)>("size");
-        public Tensor ToTensor() => JSRef!.Call<Tensor>("toTensor");
+        /// <summary>
+        /// Returns the image as a tensor
+        /// </summary>
+        /// <param name="channelFormat"></param>
+        /// <returns></returns>
+        public Tensor ToTensor(string? channelFormat = null) => channelFormat == null ? JSRef!.Call<Tensor>("toTensor") : JSRef!.Call<Tensor>("toTensor", channelFormat);
+        /// <summary>
+        /// Returns the image as a canvas
+        /// </summary>
+        /// <returns></returns>
+        public OffscreenCanvas ToCanvas() => JSRef!.Call<OffscreenCanvas>("toCanvas");
+        /// <summary>
+        /// Save the image to the given path.
+        /// </summary>
+        /// <param name="path">The path to save the image to.</param>
+        public Task Save(string path) => JSRef!.CallVoidAsync("save", path);
     }
 }

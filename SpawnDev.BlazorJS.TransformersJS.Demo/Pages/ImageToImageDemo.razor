@@ -1,0 +1,47 @@
+﻿@page "/ImageToImage"
+
+<div class="container">
+    <h3>Image-to-Image Enhancement</h3>
+    <p>
+        This demonstrates the use of Transformers.js and image-to-image models for image enhancement,
+        super-resolution, and other image transformations.
+    </p>
+    <p>
+        <a target="_blank" href="https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS/blob/main/SpawnDev.BlazorJS.TransformersJS.Demo/Pages/ImageToImageDemo.razor">Page source</a>
+    </p>
+    <div>
+        <RadzenStack Orientation="Orientation.Vertical" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem">
+            <RadzenLabel Text="Select an ONNX Image-to-Image Model" Component="DropDownBindValue" />
+            <RadzenDropDown @bind-Value=@SelectedModel Data=@Models Style="width: 100%; max-width: 400px;" Name="DropDownBindValue" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
+            <RadzenCheckBox @bind-Value=@UseWebGPU Name="WebGPUCheckBox" />
+            <RadzenLabel Text="WebGPU" Component="WebGPUCheckBox" class="rz-ms-2" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
+            <input @ref=fileInputRef accept="image/*" type="file" disabled="@(busy || !beenInit)" style="width: 100%;" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
+            <button @onclick="RunIt" disabled="@(busy || !beenInit || File == null)">Transform Image</button>
+        </RadzenStack>
+        <div style="padding: 1rem 0;">
+            <button style="margin: 2px;" @onclick="SaveTransformedImageDirect" disabled="@(busy || !beenInit || File == null || lastTransformedImage == null)">Save Transformed Image: @(outputFileName)</button>
+        </div>
+    </div>
+    <div style="padding: 0.5rem 0; max-width: 600px;">
+        <ModelLoadView ModelProgresses="@ModelProgresses" />
+    </div>
+    <div style="padding: 0.5rem 0; display: flex; gap: 1rem; align-items: flex-start;">
+        <div>
+            <h4>Original Image</h4>
+            <img src="@fileObjectUrl" style="max-width: 400px; max-height: 400px; min-width: 100px; min-height: 100px; border: 1px solid black; @(string.IsNullOrEmpty(fileObjectUrl) ? "display: none;" : "")">
+        </div>
+        <div>
+            <h4>Transformed Image</h4>
+            <img src="@transformedObjectUrl" style="max-width: 400px; max-height: 400px; min-width: 100px; min-height: 100px; border: 1px solid black; @(string.IsNullOrEmpty(transformedObjectUrl) ? "display: none;" : "")">
+        </div>
+    </div>
+    <div style="padding: 0.5rem 0;">
+        @((MarkupString)logMessage)
+    </div>
+</div>
