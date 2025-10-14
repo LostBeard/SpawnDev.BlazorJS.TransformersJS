@@ -20,13 +20,9 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Pages
         string? fileObjectUrl = "images/invoice.png";
         string? resultObjectUrl = null;
         Dictionary<string, ModelLoadProgress> ModelProgresses = new();
-        //AutoImageProcessor? autoImageProcessor = null;
-        //AutoModel? autoModel = null;
         DocumentQuestionAnsweringPipeline? documentQuestionAnsweringPipeline = null;
-
-        string Question = "What is the invoice number?";
-
         DocumentQuestionAnsweringOutput[] Answers = new DocumentQuestionAnsweringOutput[0];
+        string Question = "What is the invoice number?";
 
         protected override void OnAfterRender(bool firstRender)
         {
