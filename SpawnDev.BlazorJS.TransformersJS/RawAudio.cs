@@ -13,9 +13,17 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <summary>
         /// Create a new `RawAudio` object.
         /// </summary>
-        /// <param name="audio">audio Audio data</param>
-        /// <param name="samplingRate">sampling_rate Sampling rate of the audio data</param>
+        /// <param name="audio">Audio data</param>
+        /// <param name="samplingRate">Sampling rate of the audio data</param>
         public RawAudio(Float32Array audio, double samplingRate) : base(JS.New("Transformers.RawAudio", audio, samplingRate)) { }
+        /// <summary>
+        /// Audio data
+        /// </summary>
+        public Float32Array Audio => JSRef!.Get<Float32Array>("audio");
+        /// <summary>
+        /// Sampling rate of the audio data
+        /// </summary>
+        public double SamplingRate => JSRef!.Get<double>("sampling_rate");
         /// <summary>
         /// Convert the audio to a wav file buffer.
         /// </summary>
