@@ -23,7 +23,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Pages
         AutoImageProcessor? autoImageProcessor = null;
         AutoModel? autoModel = null;
 
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        protected override void OnAfterRender(bool firstRender)
         {
             if (!beenInit && fileInput == null)
             {
