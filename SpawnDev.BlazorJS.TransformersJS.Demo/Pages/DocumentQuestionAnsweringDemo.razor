@@ -1,0 +1,36 @@
+﻿@page "/DocumentQuestionAnsweringDemo"
+
+<div class="container">
+    <h3>Document Question Answering Demo</h3>
+    <p>
+        This demonstrates the use of Transformers.js and the
+        <a href="https://huggingface.co/Xenova/donut-base-finetuned-docvqa">Xenova/donut-base-finetuned-docvqa</a>
+        model for document question answering.<br/>
+        Note: This pipeline and model currently crashes with WebGPU enabled. Without WebGPU the process can be quite slow.
+    </p>
+    <p>
+        <a target="_blank" href="https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS/blob/main/SpawnDev.BlazorJS.TransformersJS.Demo/Pages/DocumentQuestionAnsweringDemo.razor">Page source</a>
+    </p>
+    <div>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
+            <input @ref=fileInputRef accept="image/*" type="file" disabled="@(busy || !beenInit)" style="width: 100%;" />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
+            <input name="document-question" placeholder="Question..." style="color: black; width: 100%;" type="text" @bind-value=Question />
+        </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
+            <button @onclick="RunIt" disabled="@(busy || !beenInit)">Run</button>
+        </RadzenStack>
+    </div>
+    <div style="padding: 0.5rem 0;">
+        @((MarkupString)logMessage)
+    </div>
+    <div style="padding: 0.5rem 0; max-width: 600px;">
+        <ModelLoadView ModelProgresses="@ModelProgresses" />
+    </div>
+    <div style="padding: 0.5rem 0;">
+        <img width="480" src="@fileObjectUrl" style="min-width: 100px; min-height: 100px; border: 1px solid black; @(string.IsNullOrEmpty(fileObjectUrl) || !string.IsNullOrEmpty(resultObjectUrl) ? "display: none;" : "")">
+        <img width="480" src="@resultObjectUrl" style="min-width: 100px; min-height: 100px; border: 1px solid black; @(string.IsNullOrEmpty(resultObjectUrl) ? "display: none;" : "")">
+    </div>
+</div>
+

@@ -126,6 +126,17 @@ namespace SpawnDev.BlazorJS.TransformersJS
             => Pipeline<ImageToImagePipeline>("image-to-image", model, pipelineOptions);
 
         /// <summary>
+        /// Create a new document question answering pipeline
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="pipelineOptions"></param>
+        /// <returns></returns>
+        public Task<DocumentQuestionAnsweringPipeline> DocumentQuestionAnsweringPipeline(string? model = null, PipelineOptions? pipelineOptions = null)
+            => Pipeline<DocumentQuestionAnsweringPipeline>("document-question-answering", model, pipelineOptions);
+
+        
+
+        /// <summary>
         /// Returns the version of the transformers.js library
         /// </summary>
         public static string? Version => JS.Get<string>($"{GlobalModuleName}.env.version");

@@ -30,5 +30,22 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <param name="args"></param>
         /// <returns></returns>
         public T _CallSync<T>(params object[] args) => JSRef!.Call<T>("_call.apply", JSRef, args);
+        /// <summary>
+        /// Checks if the returned JSObject is already an array. If it is, it is returned, otherwise an array is created with the single item.<br/>
+        /// If the value is null, an empty array is returned.<br/>
+        /// This method is useful for handling pipeline calls that may return either a single object or an array of objects.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="valueOrArray"></param>
+        /// <returns></returns>
+        protected T[] MakeArray<T>(JSObject valueOrArray)
+        {
+            if (valueOrArray == null) return new T[0];
+
+            JS.Log("valueOrArray", valueOrArray);
+            JS.Set("_valueOrArray", valueOrArray);
+
+            return JSObjects.Array.IsArray(valueOrArray) ? valueOrArray.JSRefAs<T[]>() : new T[] { valueOrArray.JSRefAs<T>() };
+        }
     }
 }
