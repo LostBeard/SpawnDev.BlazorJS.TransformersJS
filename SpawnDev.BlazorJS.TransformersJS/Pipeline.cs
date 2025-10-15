@@ -41,10 +41,6 @@ namespace SpawnDev.BlazorJS.TransformersJS
         protected T[] MakeArray<T>(JSObject valueOrArray)
         {
             if (valueOrArray == null) return new T[0];
-
-            JS.Log("valueOrArray", valueOrArray);
-            JS.Set("_valueOrArray", valueOrArray);
-
             return JSObjects.Array.IsArray(valueOrArray) ? valueOrArray.JSRefAs<T[]>() : new T[] { valueOrArray.JSRefAs<T>() };
         }
     }
