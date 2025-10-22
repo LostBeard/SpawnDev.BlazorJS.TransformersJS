@@ -1,0 +1,66 @@
+.audio-message-recorder {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--rz-body-background-color);
+}
+
+.audio-message-recorder-first {
+    position: relative;
+}
+
+.audio-message-recorder-first-inner {
+
+}
+
+.audio-message-recorder-live {
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+}
+
+.audio-message-recorder-second {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.audio-message-recorder-second-inner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.audio-overlay-div {
+    width: 100%;
+}
+
+.audio-recording-list {
+    min-height: 100%;
+    width: 100%;
+    flex-direction: column-reverse;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.audio-recording {
+    position: relative;
+    width: 240px;
+    height: 135px;
+}
+    .audio-recording > audio {
+        border: 1px solid white;
+        width: 100%;
+        height: 100%;
+    }
+
+    .video-recording > .video-recording-overlay {
+        width: 100%;
+    }
+
+.message-recorder-audio-container {
+    padding: 4px;
+}

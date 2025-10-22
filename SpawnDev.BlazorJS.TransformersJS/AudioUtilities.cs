@@ -1,5 +1,4 @@
 ﻿using SpawnDev.BlazorJS.JSObjects;
-using System;
 
 namespace SpawnDev.BlazorJS.TransformersJS
 {

@@ -3,15 +3,14 @@
 <div class="container">
     <h3>Text To Image</h3>
 
-    <img width="960" src="@depthObjectUrl" style="min-width: 100px; min-height: 100px; border: 1px solid black;">
+    <img width="960" src="@generatedImageObjectUrl" style="min-width: 100px; min-height: 100px; border: 1px solid black;">
     <br />
-    <a style="@(string.IsNullOrEmpty(outputFileName) || string.IsNullOrEmpty(depthObjectUrl) ? "display: none;" : "")" href="@depthObjectUrl" download="@outputFileName">@outputFileName</a>
+    <a style="@(string.IsNullOrEmpty(outputFileName) || string.IsNullOrEmpty(generatedImageObjectUrl) ? "display: none;" : "")" href="@generatedImageObjectUrl" download="@outputFileName">@outputFileName</a>
     <br />
     <ModelLoadView ModelProgresses="@ModelProgresses" />
     <div>
-        <button onclick="@LoadModel" disabled="@(busy || beenInit)">Load Depth Estimation Pipeline WebGPU</button><br />
         <input type="text" @bind="TextBoxValue" placeholder="Enter text" /><br />
-        <button onclick="@ProcessText" disabled="@(busy || !beenInit)">Process Text</button>
+        <button onclick="@Run" disabled="@(busy)">Run</button>
         <br />
     </div>
     <p>@((MarkupString)logMessage)</p>

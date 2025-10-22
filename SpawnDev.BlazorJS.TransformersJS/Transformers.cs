@@ -4,7 +4,7 @@ using SpawnDev.BlazorJS.JSObjects;
 namespace SpawnDev.BlazorJS.TransformersJS
 {
     /// <summary>
-    /// 
+    /// Transformers.js exports
     /// </summary>
     public class Transformers : JSObject
     {
@@ -15,14 +15,14 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <summary>
         /// Transformers.js bundled with this library<br/>
         /// Downloaded from:<br/>
-        /// https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.5
+        /// https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.6
         /// </summary>
-        public static string LatestBundledVersionSrc { get; } = $"./_content/SpawnDev.BlazorJS.TransformersJS/transformers-3.7.5.js";
+        public static string LatestBundledVersionSrc { get; } = $"./_content/SpawnDev.BlazorJS.TransformersJS/transformers-3.7.6.js";
         /// <summary>
         /// Transformers.js CDN URL<br/>
         /// https://cdn.jsdelivr.net/npm/@huggingface/transformers<br/>
         /// To get a specific version use the @ tag:<br/>
-        /// https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.5
+        /// https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.6
         /// </summary>
         public static string LatestCDNVersionSrc { get; } = $"https://cdn.jsdelivr.net/npm/@huggingface/transformers";
         /// <summary>
@@ -134,7 +134,23 @@ namespace SpawnDev.BlazorJS.TransformersJS
         public Task<DocumentQuestionAnsweringPipeline> DocumentQuestionAnsweringPipeline(string? model = null, PipelineOptions? pipelineOptions = null)
             => Pipeline<DocumentQuestionAnsweringPipeline>("document-question-answering", model, pipelineOptions);
 
-        
+        /// <summary>
+        /// Create a new automatic speech recognition pipeline
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="pipelineOptions"></param>
+        /// <returns></returns>
+        public Task<AutomaticSpeechRecognitionPipeline> AutomaticSpeechRecognitionPipeline(string? model = null, PipelineOptions? pipelineOptions = null)
+            => Pipeline<AutomaticSpeechRecognitionPipeline>("automatic-speech-recognition", model, pipelineOptions);
+
+        /// <summary>
+        /// Create a new text to image pipeline
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="pipelineOptions"></param>
+        /// <returns></returns>
+        public Task<TextToImagePipeline> TextToImagePipeline(string? model = null, PipelineOptions? pipelineOptions = null)
+            => Pipeline<TextToImagePipeline>("text-to-image", model, pipelineOptions);
 
         /// <summary>
         /// Returns the version of the transformers.js library

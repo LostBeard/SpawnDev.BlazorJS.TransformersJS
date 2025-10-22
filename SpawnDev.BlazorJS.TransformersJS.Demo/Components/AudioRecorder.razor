@@ -1,0 +1,36 @@
+﻿<div class="audio-message-recorder">
+    <div class="audio-message-recorder-first">
+        <div class="audio-message-recorder-first-inner">
+            <div class="message-recorder-audio-container">
+                <canvas width="300" height="100" @ref="canvasElRef"></canvas>
+            </div>
+            <div class="audio-overlay-div">
+                @if (mediaStreamRecording != null)
+                {
+                    <RadzenButton style="background-color: transparent;" Icon="send" title="Send" Click="@(() => CloseDialog(mediaStreamRecording))"></RadzenButton>
+                    <RadzenButton style="background-color: transparent;" Icon="delete" title="Discard" Click="@(() => DeleteRecording())"></RadzenButton>
+                }
+                else if (MediaStream != null)
+                {
+                    <RadzenButton Style="background-color: transparent;" title="Record" Icon="voicemail" Disabled=@isRecordDisabled Click="@(() => StartRecording())"></RadzenButton>
+                    <RadzenButton Style="background-color: transparent;" title="Pause" Icon="pause" Disabled=@isPauseDisabled Click="@(() => PauseRecording())"></RadzenButton>
+                    <RadzenButton Style="background-color: transparent;" title="Stop" Icon="stop" Disabled=@isStopDisabled Click="@(() => StopRecording())"></RadzenButton>
+                    <!-- <RadzenButton Icon="close" Disabled=@isRecordDisabled Click="@(() => CloseMediaStream())"></RadzenButton> -->
+                }
+                else
+                {
+                    <RadzenSplitButton Click=@(async (i) => await CameraSelectSplit(i)) Text="Select Source" Icon="add_circle_outline" ButtonStyle="ButtonStyle.Primary">
+                        <ChildContent>
+
+                        </ChildContent>
+                    </RadzenSplitButton>
+                    <RadzenButton Icon="close" Click="@(() => CloseDialog(null))"></RadzenButton>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}
