@@ -3,6 +3,73 @@
     max-width: 100%;
     max-height: 100%;
 }
+/* /Components/AudioRecorder.razor.rz.scp.css */
+.audio-message-recorder[b-x8met109a8] {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--rz-body-background-color);
+}
+
+.audio-message-recorder-first[b-x8met109a8] {
+    position: relative;
+}
+
+.audio-message-recorder-first-inner[b-x8met109a8] {
+
+}
+
+.audio-message-recorder-live[b-x8met109a8] {
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+}
+
+.audio-message-recorder-second[b-x8met109a8] {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.audio-message-recorder-second-inner[b-x8met109a8] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.audio-overlay-div[b-x8met109a8] {
+    width: 100%;
+}
+
+.audio-recording-list[b-x8met109a8] {
+    min-height: 100%;
+    width: 100%;
+    flex-direction: column-reverse;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.audio-recording[b-x8met109a8] {
+    position: relative;
+    width: 240px;
+    height: 135px;
+}
+    .audio-recording > audio[b-x8met109a8] {
+        border: 1px solid white;
+        width: 100%;
+        height: 100%;
+    }
+
+    .video-recording > .video-recording-overlay[b-x8met109a8] {
+        width: 100%;
+    }
+
+.message-recorder-audio-container[b-x8met109a8] {
+    padding: 4px;
+}
 /* /Layout/AppTray/AppTrayArea.razor.rz.scp.css */
 
 .app-tray-area[b-mh1m0vceps] {
