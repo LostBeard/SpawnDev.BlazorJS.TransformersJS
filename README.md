@@ -21,6 +21,7 @@ The current demo app uses Transformers.js, Blazor, and WebGL.
 - [Live Demo](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS)  
 - [2D to 2D+Z](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS)  
 - [2D to Anaglyph](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/AnaglyphImageDemo)  
+- [Image Enhancement](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/ImageToImage)
 - [Text To Speech](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/TextToSpeechClient)  
 - [Keypoint Detection](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/KeypointDetectionDemo)  
 - [Realtime 2D to 2DZ](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/RealTime2DZ)  
