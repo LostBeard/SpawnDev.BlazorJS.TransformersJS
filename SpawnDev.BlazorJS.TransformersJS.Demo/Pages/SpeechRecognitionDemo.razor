@@ -14,12 +14,6 @@
             <RadzenCheckBox @bind-Value=@UseWebGPU Name="WebGPUCheckBox" Disabled=true />
             <RadzenLabel Text="WebGPU" Component="WebGPUCheckBox" class="rz-ms-2" />
         </RadzenStack>
-        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
-            <input @ref=fileInputRef accept="audio/*" type="file" disabled="@(busy || !beenInit)" style="width: 100%;" />
-        </RadzenStack>
-        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
-            <button @onclick="RunIt" disabled="@(busy || !beenInit || string.IsNullOrEmpty(fileObjectUrl))">Run</button>
-        </RadzenStack>
     </div>
     <div style="padding: 0.5rem 0; max-width: 600px;">
         <ModelLoadView ModelProgresses="@ModelProgresses" />
@@ -30,6 +24,12 @@
             <div>
                 <audio src="@fileObjectUrl" controls style="@(string.IsNullOrEmpty(fileObjectUrl) ? "display: none;" : "")" />
             </div>
+            <div>
+                <input @ref=fileInputRef accept="audio/*" type="file" disabled="@(busy || !beenInit)" style="width: 100%;" />
+            </div>
+        </div>
+        <div>
+            <button @onclick="RunIt" disabled="@(busy || !beenInit || string.IsNullOrEmpty(fileObjectUrl))">Run</button>
         </div>
         <div>
             <h4>Result</h4>
