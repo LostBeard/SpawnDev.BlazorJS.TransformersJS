@@ -3,15 +3,11 @@
 <div class="container">
     <h3>Speed Recognition</h3>
     <p>
-        This demonstrates the use of Transformers.js and image-to-image models for image enhancement,
-        super-resolution, and other image transformations.
-    </p>
-    <p>
-        <a target="_blank" href="https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS/blob/main/SpawnDev.BlazorJS.TransformersJS.Demo/Pages/ImageToImageDemo.razor">Page source</a>
+        <a target="_blank" href="https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS/blob/main/SpawnDev.BlazorJS.TransformersJS.Demo/Pages/SpeechRecognitionDemo.razor">Page source</a>
     </p>
     <div>
         <RadzenStack Orientation="Orientation.Vertical" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem">
-            <RadzenLabel Text="Select an ONNX Image-to-Image Model" Component="DropDownBindValue" />
+            <RadzenLabel Text="Select an ONNX Model" Component="DropDownBindValue" />
             <RadzenDropDown @bind-Value=@SelectedModel Data=@Models Style="width: 100%; max-width: 400px;" Name="DropDownBindValue" />
         </RadzenStack>
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Normal" JustifyContent="JustifyContent.Left" Gap="0.5rem" Style="padding: 1rem 0;">
