@@ -26,6 +26,7 @@ The current demo app uses Transformers.js, Blazor, and WebGL.
 - [Realtime 2D to 2DZ](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/RealTime2DZ)  
 - [Webcam 2D to 3D](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/RealTime2Dto3D)  
 - [Video 2D to 3D](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/RealTimeVideo2Dto3D)
+- [Speech Recognition](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/SpeechRecognition)
 
 #### WIP
-This project is a "Work In Progress" and is currently limited. If you are interested in this project, please start an issue to suggest features or areas of interest.
+If you are interested in this project, please start an issue to suggest features or areas of interest.
