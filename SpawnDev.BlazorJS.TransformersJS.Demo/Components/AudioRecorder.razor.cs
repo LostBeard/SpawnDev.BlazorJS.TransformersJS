@@ -15,6 +15,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
         [Inject] BlazorJSRuntime JS { get; set; } = default!;
         [Inject] DialogService DialogService { get; set; } = default!;
         [Inject] MediaDevicesService MediaDevicesService { get; set; } = default!;
+        [Parameter] public EventCallback<MediaStreamRecording?> OnRecordingChanged { get; set; }
         TimeSpan RecordingDurationTimeSpan => mediaStreamRecording == null ? RecordingDuration.Elapsed : TimeSpan.FromMilliseconds(mediaStreamRecording.Duration);
         Stopwatch RecordingDuration = new Stopwatch();
         bool _beenInit = false;
@@ -25,12 +26,14 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
         bool isRecordingPaused => mediaRecorder != null && mediaRecorder.State == "paused";
         bool isRecording => mediaRecorder != null && mediaRecorder.State != "inactive";
         bool canRecord => MediaStream != null && !MediaStream.IsWrapperDisposed;
-        bool isRecordDisabled => (isRecording && !isRecordingPaused) || !canRecord;
+        bool isRecordDisabled => (isRecording && !isRecordingPaused) || !canRecord || mediaStreamRecording != null;
         bool isPauseDisabled => !isRecording || isRecordingPaused;
+        bool isDiscardDisabled => isRecording || mediaStreamRecording == null;
         bool isStopDisabled => !isRecording;
+        bool isSelectSourceDisable => isRecording;
         bool DiscardRecording = false;
         double RecordingTimeSlice = 0;
-        bool inCameraSelect = false;
+        bool selecting = false;
         bool IsDisposing = false;
         bool IsDisposed = false;
         // audio context
@@ -55,7 +58,6 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
                 canvasEl = new HTMLCanvasElement(canvasElRef);
                 ctx = canvasEl.Get2DContext();
                 MediaDevicesService.OnDeviceInfosChanged += MediaDevicesService_OnDeviceInfosChanged;
-                await CameraSelect();
             }
         }
         private void DataFlushTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
@@ -64,27 +66,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
         }
         private void MediaDevicesService_OnDeviceInfosChanged()
         {
-            if (MediaStream == null)
-            {
-                _ = CameraSelect();
-            }
             StateHasChanged();
-        }
-        public async Task CameraSelectSplit(RadzenSplitButtonItem item)
-        {
-            var value = item == null ? "" : item.Value;
-            switch (value)
-            {
-                case "":
-                    await CameraSelect();
-                    break;
-                case "1":
-
-                    break;
-                case "2":
-
-                    break;
-            }
         }
         void StartRecording()
         {
@@ -136,6 +118,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
             mediaStreamRecording = null;
             amplitudes = new List<double>();
             StateHasChanged();
+            _ = OnRecordingChanged.InvokeAsync(mediaStreamRecording!);
         }
         void CloseMediaStream()
         {
@@ -168,20 +151,20 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
                 mediaRecorder = null;
             }
         }
-        public async Task<bool> CameraSelect()
+        public async Task<bool> SelectMediaSource()
         {
             var ret = false;
             MediaStream? selected = null;
-            if (inCameraSelect) return ret;
-            inCameraSelect = true;
+            if (selecting) return ret;
+            selecting = true;
             try
             {
-                selected = await MediaDevicesService.MediaDevices.GetUserMedia(false, true);
+                selected = await MediaDevicesService.MediaDevices!.GetUserMedia(false, true);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"GetUserMedia error: {ex.Message}");
-                inCameraSelect = false;
+                selecting = false;
                 return ret;
             }
             JS.Set("_selected", selected);
@@ -204,7 +187,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
                 StateHasChanged();
                 ret = true;
             }
-            inCameraSelect = false;
+            selecting = false;
             return ret;
         }
         void MediaRecorder_OnDataAvailable(BlobEvent blobEvent)
@@ -296,6 +279,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
 #if DEBUG
                 JS.Log("lastRecordingURL", sw.Elapsed.TotalMilliseconds, recording.Data!.Size, recording.URL);
 #endif
+                await OnRecordingChanged.InvokeAsync(mediaStreamRecording);
                 StateHasChanged();
             }
             catch (Exception ex)
@@ -332,10 +316,10 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
             }
             IsDisposed = true;
         }
-        async Task CloseDialog(MediaStreamRecording? recording)
-        {
-            DialogService.Close(recording);
-        }
+        //async Task CloseDialog(MediaStreamRecording? recording)
+        //{
+        //    DialogService.Close(recording);
+        //}
         // https://jameshfisher.com/2021/01/18/measuring-audio-volume-in-javascript/
         void InitAudioContext(MediaStream stream)
         {
@@ -409,7 +393,12 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
             var cw = canvasEl.Width;
             var count = amplitudes.Count;
             var maxAmplitude = MaxMicInputVolume;
+            // clear
             ctx!.ClearRect(0, 0, cw, ch);
+            // center bar
+            ctx.FillStyle = "white";
+            ctx.FillRect(0, (ch / 2) - 1, cw, 2);
+            // waveform
             if (mediaStreamRecording != null)
             {
                 ctx.FillStyle = "blue";
@@ -441,9 +430,6 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
             ctx.Font = "bold 16px verdana, sans-serif";
             var txt = RecordingDurationTimeSpan.ToString().Split('.')[0];
             ctx.FillText(txt, 2, 18);
-            //
-            ctx.FillStyle = "white";
-            ctx.FillRect(0, (ch / 2) - 1, cw, 2);
 #if DEBUG && false
             ctx.FillText(elapsed.ToString(), 2, 36);
 #endif

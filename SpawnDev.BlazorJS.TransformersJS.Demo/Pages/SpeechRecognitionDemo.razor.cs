@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SpawnDev.BlazorJS.JSObjects;
+using SpawnDev.BlazorJS.TransformersJS.Demo.Components;
 using File = SpawnDev.BlazorJS.JSObjects.File;
 
 namespace SpawnDev.BlazorJS.TransformersJS.Demo.Pages
@@ -12,7 +13,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Pages
         ElementReference fileInputRef;
         HTMLInputElement? fileInput;
         File? File = null;
-        string? fileObjectUrl = "audio/jfk.wav";
+        string? fileObjectUrl = null;
         bool beenInit = false;
         bool busy = false;
         string logMessage = "";
@@ -33,6 +34,19 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Pages
         Dictionary<string, AutomaticSpeechRecognitionPipeline> Pipelines = new Dictionary<string, AutomaticSpeechRecognitionPipeline>();
 
         Dictionary<string, ModelLoadProgress> ModelProgresses = new();
+
+        void OnRecordingChanged(MediaStreamRecording mediaStreamRecording)
+        {
+            if (!string.IsNullOrEmpty(fileObjectUrl))
+            {
+                URL.RevokeObjectURL(fileObjectUrl);
+                fileObjectUrl = null;
+            }
+            File?.Dispose();
+            File = null;
+            fileObjectUrl = mediaStreamRecording?.URL;
+            StateHasChanged();
+        }
 
         void Pipeline_OnProgress(ModelLoadProgress obj)
         {
@@ -168,6 +182,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Pages
             {
                 // Process using the pipeline
                 PipelineResult?.Dispose();
+                PipelineResult = null;
                 PipelineResult = await SelectedPipeline.Call(fileObjectUrl!);
 
                 Log($"Pipeline call completed.");
