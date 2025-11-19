@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35617.110
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnDev.BlazorJS.TransformersJS.Demo", "SpawnDev.BlazorJS.TransformersJS.Demo\SpawnDev.BlazorJS.TransformersJS.Demo.csproj", "{0F35172D-CC9D-46A1-89A9-02AE3C7C6FA6}"
 EndProject

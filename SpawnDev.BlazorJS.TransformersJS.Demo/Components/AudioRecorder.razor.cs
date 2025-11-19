@@ -372,6 +372,13 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
             MaxMicInputVolume = 0;
             amplitudes.Clear();
         }
+        /// <summary>
+        /// Analyzes the current audio frame to calculate microphone input volume and update amplitude data.
+        /// </summary>
+        /// <remarks>This method retrieves time-domain audio data from the analyzer node, calculates the
+        /// maximum microphone input volume, and updates the amplitude history. If recording is paused or the media
+        /// stream is not initialized, the method exits early. The method also updates the elapsed time for the analysis
+        /// operation.</remarks>
         void AnalyseFrame()
         {
             if (analyserNode == null || pcmData == null) return;
@@ -380,7 +387,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
             {
                 analyserNode.GetFloatTimeDomainData(pcmData);
                 var pcmDataNet = pcmData.ToArray();
-                MicInputVolume = pcmDataNet.Average(); // Math.Sqrt(pcmDataNet.SquareAvgFastDouble());
+                MicInputVolume = pcmDataNet.Max();
                 if (MaxMicInputVolume < MicInputVolume) MaxMicInputVolume = MicInputVolume;
                 amplitudes.Add(MicInputVolume);
             }
