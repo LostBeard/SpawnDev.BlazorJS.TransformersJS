@@ -3,11 +3,6 @@ using SpawnDev.BlazorJS.JSObjects;
 
 namespace SpawnDev.BlazorJS.TransformersJS.ONNX
 {
-    public class RuntimeTensor : JSObject
-    {
-        /// <inheritdoc/>
-        public RuntimeTensor(IJSInProcessObjectReference _ref) : base(_ref) { }
-    }
     /// <summary>
     /// Represent multi-dimensional arrays to feed to or fetch from model inferencing.<br/>
     /// https://onnxruntime.ai/docs/api/js/interfaces/Tensor-1.html

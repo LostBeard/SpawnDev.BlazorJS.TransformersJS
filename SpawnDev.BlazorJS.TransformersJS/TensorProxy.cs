@@ -16,7 +16,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <summary>
         /// Returns the ORT Tensor if this tensor proxy wraps one
         /// </summary>
-        public virtual Tensor? OrtTensor => JSRef!.Get<Tensor?>("ort_tensor");
+        public Tensor? OrtTensor => JSRef!.Get<Tensor?>("ort_tensor");
         /// <summary>
         /// Returns the ORT Tensor if this tensor proxy wraps one
         /// </summary>
@@ -38,6 +38,6 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <summary>
         /// Returns the ORT Tensor if this tensor proxy wraps one
         /// </summary>
-        public override Tensor<TData>? OrtTensor => JSRef!.Get<Tensor<TData>?>("ort_tensor");
+        public new Tensor<TData>? OrtTensor => JSRef!.Get<Tensor<TData>?>("ort_tensor");
     }
 }
