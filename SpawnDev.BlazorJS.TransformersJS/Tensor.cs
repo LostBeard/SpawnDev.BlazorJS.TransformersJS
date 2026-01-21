@@ -11,9 +11,9 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <inheritdoc/>
         public Tensor(IJSInProcessObjectReference _ref) : base(_ref) { }
 
-        public Tensor(Float32Array data, int[] shape) : base(JS.New("Tensor", data, shape)) { }
+        public Tensor(Float32Array data, int[] shape) : base(JS.New("Transformers.Tensor", data, shape)) { }
 
-        public Tensor(float[] data, int[] shape) : base(JS.New("Tensor", Float32Array.From(data), shape)) { }
+        public Tensor(float[] data, int[] shape) : base(JS.New("Transformers.Tensor", Float32Array.From(data), shape)) { }
 
         /// <summary>
         /// A property that returns an array of numbers representing the dimensions

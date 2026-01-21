@@ -29,7 +29,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <param name="question">A question to ask of the document.</param>
         /// <param name="options">Additional keyword arguments to pass along to the generate method of the model.</param>
         /// <returns></returns>
-        public async Task<DocumentQuestionAnsweringOutput[]> Call(RawImage source, string question, object? options = null) 
+        public async Task<DocumentQuestionAnsweringOutput[]> Call(RawImage source, string question, object? options = null)
             => options == null ? MakeArray<DocumentQuestionAnsweringOutput>(await _Call<JSObject>(source, question)) : MakeArray<DocumentQuestionAnsweringOutput>(await _Call<JSObject>(source, question, options));
     }
 }

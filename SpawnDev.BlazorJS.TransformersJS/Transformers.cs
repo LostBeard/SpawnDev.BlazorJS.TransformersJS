@@ -104,7 +104,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <param name="model"></param>
         /// <param name="pipelineOptions"></param>
         /// <returns></returns>
-        public Task<TPipeline> Pipeline<TPipeline>(string task, string? model = null, PipelineOptions? pipelineOptions = null) where TPipeline : Pipeline 
+        public Task<TPipeline> Pipeline<TPipeline>(string task, string? model = null, PipelineOptions? pipelineOptions = null) where TPipeline : Pipeline
             => pipelineOptions == null ? JS.CallAsync<TPipeline>($"{GlobalModuleName}.pipeline", task, model) : JSRef!.CallAsync<TPipeline>("pipeline", task, model, pipelineOptions);
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <param name="model"></param>
         /// <param name="pipelineOptions"></param>
         /// <returns></returns>
-        public Task<DepthEstimationPipeline> DepthEstimationPipeline(string? model = null, PipelineOptions? pipelineOptions = null) 
+        public Task<DepthEstimationPipeline> DepthEstimationPipeline(string? model = null, PipelineOptions? pipelineOptions = null)
             => Pipeline<DepthEstimationPipeline>("depth-estimation", model, pipelineOptions);
 
         /// <summary>

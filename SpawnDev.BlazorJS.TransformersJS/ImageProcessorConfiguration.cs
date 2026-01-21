@@ -11,27 +11,27 @@ namespace SpawnDev.BlazorJS.TransformersJS
         public bool DoRescale { get => JSRef!.Get<bool>("do_rescale"); set => JSRef!.Set("do_rescale", value); }
         public float[] ImageMean
         {
-            get => JSRef!.Get<float[]>("image_mean"); 
+            get => JSRef!.Get<float[]>("image_mean");
             set => JSRef!.Set("image_mean", value);
         }
         public string ImageProcessorType
         {
-            get => JSRef!.Get<string>("image_processor_type"); 
+            get => JSRef!.Get<string>("image_processor_type");
             set => JSRef!.Set("image_processor_type", value);
         }
         public float[] ImageStd
         {
-            get => JSRef!.Get<float[]>("image_std"); 
+            get => JSRef!.Get<float[]>("image_std");
             set => JSRef!.Set("image_std", value);
         }
         public float NormalizeFactor
         {
-            get => JSRef!.Get<float>("normalize_factor"); 
+            get => JSRef!.Get<float>("normalize_factor");
             set => JSRef!.Set("normalize_factor", value);
         }
         public double RescaleFactor
         {
-            get => JSRef!.Get<double>("rescale_factor"); 
+            get => JSRef!.Get<double>("rescale_factor");
             set => JSRef!.Set("rescale_factor", value);
         }
         public Size Size

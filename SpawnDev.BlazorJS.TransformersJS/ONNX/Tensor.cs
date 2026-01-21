@@ -16,13 +16,6 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
         /// <param name="_ref"></param>
         public Tensor(IJSInProcessObjectReference _ref) : base(_ref) { }
         /// <summary>
-        /// Create a new instance
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="data"></param>
-        /// <param name="dims"></param>
-        public Tensor(string type, TData data, IEnumerable<int> dims) : base(JS.New("Transformers.Tensor", type, data, dims)) { }
-        /// <summary>
         /// The tensor data as type TData
         /// </summary>
         public TData Data => JSRef!.Get<TData>("data");
@@ -48,27 +41,6 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
     {
         /// <inheritdoc/>
         public Tensor(IJSInProcessObjectReference _ref) : base(_ref) { }
-        /// <summary>
-        /// Create a new instance
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="data"></param>
-        /// <param name="dims"></param>
-        public Tensor(string type, TypedArray data, IEnumerable<int> dims) : base(JS.New("Transformers.Tensor", type, data, dims)) { }
-        /// <summary>
-        /// Create a new instance
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="data"></param>
-        /// <param name="dims"></param>
-        public Tensor(string type, string[] data, IEnumerable<int> dims) : base(JS.New("Transformers.Tensor", type, data, dims)) { }
-        /// <summary>
-        /// Create a new instance
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="data"></param>
-        /// <param name="dims"></param>
-        public Tensor(string type, byte[] data, IEnumerable<int> dims) : base(JS.New("Transformers.Tensor", type, data, dims)) { }
         /// <summary>
         /// Dimensions of the tensor.
         /// </summary>

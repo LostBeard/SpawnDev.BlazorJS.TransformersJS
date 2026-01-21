@@ -1,6 +1,5 @@
 ﻿using Microsoft.JSInterop;
 using SpawnDev.BlazorJS.JSObjects;
-using SpawnDev.BlazorJS.TransformersJS.ONNX;
 
 namespace SpawnDev.BlazorJS.TransformersJS
 {

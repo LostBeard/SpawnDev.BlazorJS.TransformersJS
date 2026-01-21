@@ -18,7 +18,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <returns></returns>
         public Task<TextToImagePipelineResult> Call(string source, TextToImageOptions options) => _Call<TextToImagePipelineResult>(source, options);
     }
-    public  class TextToImagePipelineResult : JSObject
+    public class TextToImagePipelineResult : JSObject
     {
         /// <inheritdoc/>
         public TextToImagePipelineResult(IJSInProcessObjectReference _ref) : base(_ref) { }

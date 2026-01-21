@@ -13,7 +13,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
         public static Task<AutoModel> FromPretrained(string modelId, PipelineOptions? options = null) => JS.CallAsync<AutoModel>("Transformers.AutoModel.from_pretrained", modelId, options);
         public Task<AutoModelResult> Call(AutoImageProcessorResult source) => _Call<AutoModelResult>(source);
         public Task<T> Call<T>(AutoImageProcessorResult source) => _Call<T>(source);
-        
+
         public AutoModelConfig Config => JSRef!.Get<AutoModelConfig>("config");
     }
 }
