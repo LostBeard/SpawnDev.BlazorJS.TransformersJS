@@ -14,6 +14,6 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <summary>
         /// The raw depth map predicted by the model.
         /// </summary>
-        public TensorProxy PredictedDepth => JSRef!.Get<TensorProxy>("predicted_depth");
+        public Tensor PredictedDepth => JSRef!.Get<Tensor>("predicted_depth");
     }
 }

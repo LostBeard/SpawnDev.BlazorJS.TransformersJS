@@ -7,14 +7,14 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
     /// Represent multi-dimensional arrays to feed to or fetch from model inferencing.<br/>
     /// https://onnxruntime.ai/docs/api/js/interfaces/Tensor-1.html
     /// </summary>
-    /// <typeparam name="TData">string[] | Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float32Array | Float64Array | BigInt64Array | BigUint64Array</typeparam>
-    public class Tensor<TData> : Tensor
+    /// <typeparam name="TData">Array&lt;string> | Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Float16Array | Float32Array | Float64Array | BigInt64Array | BigUint64Array</typeparam>
+    public class ONNXTensor<TData> : ONNXTensor
     {
         /// <summary>
         /// Deserialization constructor
         /// </summary>
         /// <param name="_ref"></param>
-        public Tensor(IJSInProcessObjectReference _ref) : base(_ref) { }
+        public ONNXTensor(IJSInProcessObjectReference _ref) : base(_ref) { }
         /// <summary>
         /// The tensor data as type TData
         /// </summary>
@@ -24,27 +24,21 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
         /// </summary>
         /// <param name="dims"></param>
         /// <returns></returns>
-        public override Tensor<TData> Reshape(IEnumerable<int> dims) => JSRef!.Call<Tensor<TData>>("reshape", dims)!;
-
-        /// <summary>
-        /// Creates a deep copy of the current Tensor.
-        /// </summary>
-        /// <returns></returns>
-        public override Tensor<TData> Clone() => JSRef!.Call<Tensor<TData>>("clone")!;
+        public override ONNXTensor<TData> Reshape(IEnumerable<int> dims) => JSRef!.Call<ONNXTensor<TData>>("reshape", dims)!;
     }
     /// <summary>
     /// Represent multi-dimensional arrays to feed to or fetch from model inferencing.<br/>
     /// https://onnxruntime.ai/docs/api/js/interfaces/TensorConstructor.html<br/>
     /// https://onnxruntime.ai/docs/api/js/interfaces/Tensor-1.html
     /// </summary>
-    public class Tensor : RuntimeTensor
+    public class ONNXTensor : RuntimeTensor
     {
         /// <inheritdoc/>
-        public Tensor(IJSInProcessObjectReference _ref) : base(_ref) { }
+        public ONNXTensor(IJSInProcessObjectReference _ref) : base(_ref) { }
         /// <summary>
         /// Dimensions of the tensor.
         /// </summary>
-        public int[] Dims => JSRef!.Get<int[]>("dims");
+        public long[] Dims => JSRef!.Get<long[]>("dims");
         /// <summary>
         /// Type of the tensor.<br/>
         /// Example:
@@ -52,13 +46,13 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
         /// </summary>
         public string Type => JSRef!.Get<string>("type");
         /// <summary>
-        /// The location of the tensor data.
+        /// DataLocation: "none" | "cpu" | "cpu-pinned" | "texture" | "gpu-buffer" | "ml-tensor"
         /// </summary>
         public string Location => JSRef!.Get<string>("location");
         /// <summary>
         /// The number of elements in the tensor.
         /// </summary>
-        public int Size => JSRef!.Get<int>("size");
+        public long Size => JSRef!.Get<long>("size");
         /// <summary>
         /// Get the WebGPU buffer that holds the tensor data.<br/>
         /// If the data is not on GPU as WebGPU buffer, throw error.
@@ -102,21 +96,6 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
         /// <returns></returns>
         public string ToImageData(TensorToImageDataOptions? options = null) => options == null ? JSRef!.Call<string>("toImageData") : JSRef!.Call<string>("toImageData", options);
         /// <summary>
-        /// Performs Tensor dtype conversion.<br/>
-        /// If the self Tensor already has the correct dtype, then self is returned.
-        /// </summary>
-        /// <param name="type">The desired data type.</param>
-        /// <returns>The converted tensor.</returns>
-        public Tensor To(string type) => JSRef!.Call<Tensor>("to", type);
-        /// <summary>
-        /// Performs Tensor dtype conversion.<br/>
-        /// If the self Tensor already has the correct dtype, then self is returned.
-        /// </summary>
-        /// <typeparam name="TData"></typeparam>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public Tensor<TData> To<TData>(string type) => JSRef!.Call<Tensor<TData>>("to", type);
-        /// <summary>
         /// Calls dispose on the Javascript object and optionally (default) disposes the JSRef also<br/>
         /// </summary>
         /// <param name="disposeJSRef"></param>
@@ -130,25 +109,12 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
         /// </summary>
         /// <param name="dims">New dimensions. Size should match the old one.</param>
         /// <returns></returns>
-        public virtual Tensor Reshape(IEnumerable<int> dims) => (Tensor)JSRef!.Call(GetType(), "reshape", dims)!;
+        public virtual ONNXTensor Reshape(IEnumerable<int> dims) => (ONNXTensor)JSRef!.Call(GetType(), "reshape", dims)!;
         /// <summary>
         /// Create a new tensor with the same data buffer and specified dims.
         /// </summary>
         /// <param name="dims">New dimensions. Size should match the old one.</param>
         /// <returns></returns>
-        public virtual Tensor<TData> Reshape<TData>(IEnumerable<int> dims) => JSRef!.Call<Tensor<TData>>("reshape", dims)!;
-
-
-        /// <summary>
-        /// Creates a deep copy of the current Tensor.
-        /// </summary>
-        /// <returns>A new Tensor with the same type, data, and dimensions as the original.</returns>
-        public virtual Tensor Clone() => (Tensor)JSRef!.Call(GetType(), "clone")!;
-        /// <summary>
-        /// Creates a deep copy of the current Tensor.
-        /// </summary>
-        /// <typeparam name="TData"></typeparam>
-        /// <returns></returns>
-        public virtual Tensor<TData> Clone<TData>() => JSRef!.Call<Tensor<TData>>("clone")!;
+        public virtual ONNXTensor<TData> Reshape<TData>(IEnumerable<int> dims) => JSRef!.Call<ONNXTensor<TData>>("reshape", dims)!;
     }
 }

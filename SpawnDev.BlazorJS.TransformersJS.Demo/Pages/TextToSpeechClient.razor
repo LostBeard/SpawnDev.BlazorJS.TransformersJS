@@ -103,7 +103,7 @@
         }
         using var arrayBuffer = await response.ArrayBuffer();
         using var speakerEmbeddingsData = new Float32Array(arrayBuffer);
-        var speakerEmbeddings = new Tensor<Float32Array>("float32", speakerEmbeddingsData, [1, (int)speakerEmbeddingsData.Length]);
+        var speakerEmbeddings = new Tensor<Float32Array>("float32", speakerEmbeddingsData, [1, speakerEmbeddingsData.Length]);
         return speakerEmbeddings;
     }
     async Task Init()

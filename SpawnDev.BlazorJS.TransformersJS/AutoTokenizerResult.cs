@@ -10,7 +10,7 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// </summary>
         /// <param name="_ref"></param>
         public AutoTokenizerResult(IJSInProcessObjectReference _ref) : base(_ref) { }
-        public TensorProxy<BigInt64Array> InputIds => JSRef!.Get<TensorProxy<BigInt64Array>>("input_ids");
-        public TensorProxy<BigInt64Array> AttentionMask => JSRef!.Get<TensorProxy<BigInt64Array>>("attention_mask");
+        public Tensor<BigInt64Array> InputIds => JSRef!.Get<Tensor<BigInt64Array>>("input_ids");
+        public Tensor<BigInt64Array> AttentionMask => JSRef!.Get<Tensor<BigInt64Array>>("attention_mask");
     }
 }
