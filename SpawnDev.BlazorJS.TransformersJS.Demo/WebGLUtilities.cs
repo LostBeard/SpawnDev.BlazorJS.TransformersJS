@@ -12,7 +12,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo
             var y1 = y;
             var y2 = y + height;
             using var bufferData = new Float32Array([x1, y1, x2, y1, x1, y2, x1, y2, x2, y1, x2, y2]);
-            gl.BufferData(gl.ARRAY_BUFFER, bufferData, gl.STATIC_DRAW);
+            gl.BufferData(GL.ARRAY_BUFFER, bufferData, GL.STATIC_DRAW);
         }
         public static WebGLProgram? CreateProgramFromScripts(WebGLRenderingContext gl, string[] shaderScriptIds, string[]? optAttribs = null, int?[]? optLocations = null)
         {
@@ -20,7 +20,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo
             for (var i = 0; i < shaderScriptIds.Length; i++)
             {
                 var shaderName = shaderScriptIds[i];
-                var shaderType = shaderName.Contains("vertex") ? gl.VERTEX_SHADER : gl.FRAGMENT_SHADER;
+                var shaderType = shaderName.Contains("vertex") ? GL.VERTEX_SHADER : GL.FRAGMENT_SHADER;
                 var shader = CreateShaderFromScript(gl, shaderName, shaderType);
                 if (shader == null)
                 {
@@ -45,7 +45,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo
                 }
             }
             gl.LinkProgram(program);
-            var linked = gl.GetProgramParameter<bool>(program, gl.LINK_STATUS);
+            var linked = gl.GetProgramParameter<bool>(program, GL.LINK_STATUS);
             if (!linked)
             {
                 var lastError = gl.GetProgramInfoLog(program);
@@ -69,7 +69,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo
                 return null;
             }
         }
-        static WebGLShader? CreateShaderFromScript(WebGLRenderingContext gl, string scriptId, int shaderType)
+        static WebGLShader? CreateShaderFromScript(WebGLRenderingContext gl, string scriptId, uint shaderType)
         {
             var shaderSource = ReadEmbeddedResource($"SpawnDev.BlazorJS.TransformersJS.Demo.Shaders.{scriptId}.glsl");
             if (shaderSource == null)
@@ -79,7 +79,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo
             var shader = gl.CreateShader(shaderType);
             gl.ShaderSource(shader, shaderSource);
             gl.CompileShader(shader);
-            var compiled = gl.GetShaderParameter<bool>(shader, gl.COMPILE_STATUS);
+            var compiled = gl.GetShaderParameter<bool>(shader, GL.COMPILE_STATUS);
             if (!compiled)
             {
                 var lastError = gl.GetShaderInfoLog(shader);
