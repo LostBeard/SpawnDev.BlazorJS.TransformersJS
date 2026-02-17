@@ -1,5 +1,6 @@
 ﻿using Microsoft.JSInterop;
 using SpawnDev.BlazorJS.JSObjects;
+using SpawnDev.BlazorJS.TransformersJS.ONNX;
 
 namespace SpawnDev.BlazorJS.TransformersJS
 {
@@ -42,9 +43,35 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// <exception cref="Exception"></exception>
         public static async Task<Transformers> Init(string? srcUrl = null)
         {
-            srcUrl = srcUrl ?? LatestBundledVersionSrc;
+            JS.Log(">> TransformersJS.Init");
+            srcUrl ??= LatestBundledVersionSrc;
             var transformers = await JS.Import<Transformers>(GlobalModuleName, srcUrl);
             if (transformers == null) throw new Exception("Transformers could not be initialized.");
+            if (transformers.JSRef!.IsUndefined("ONNXTensor"))
+            {
+                // The ONNXTensor class is a powerful feature of transformers.js that allows for efficient tensor operations
+                // We extract the construcot here and add it to the Transformers class for easy access
+                // To get at the ONNXTensor constructor we have to create a Transformers.js Tensor object and get the ort_tensor from it, which is the ONNXTensor. We then add this constructor to the Transformers class as ONNXTensor for easy access.
+                try
+                {
+                    var dims = new long[] { 1, 1 };
+                    using var float32Array = new Float32Array(1);
+                    using var tensor = new Tensor("float32", float32Array, dims);
+                    JS.Log("_Tensor", tensor);
+                    JS.Set("_Tensor", tensor);
+                    using var ortTensor = tensor.OrtTensor;
+                    using var ortTensorConstructor = ortTensor!.JSRef!.Get<JSObject>("constructor");
+                    // this allows us to create new ONNXTensor isntance using new Tensor.ONNXTensor in Javascript, and new Transformers.ONNXTensor in C#
+                    // and also the static methods of the ONNXTensor class will be available on the Transformers.ONNXTensor class in C#
+                    JS.Log($"{nameof(ONNXTensor)}", ortTensorConstructor);
+                    JS.Set($"{nameof(ONNXTensor)}", ortTensorConstructor);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("WTAF: "+ ex.Message);
+                }
+            }
+            JS.Log("<< TransformersJS.Init");
             return transformers;
         }
         static bool? hasFp16 = null;

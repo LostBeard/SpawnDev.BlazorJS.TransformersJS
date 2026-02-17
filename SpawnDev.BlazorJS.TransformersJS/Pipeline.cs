@@ -1,7 +1,57 @@
 ﻿using Microsoft.JSInterop;
+using SpawnDev.BlazorJS.TransformersJS.ONNX;
 
 namespace SpawnDev.BlazorJS.TransformersJS
 {
+    /// <summary>
+    /// Represents a model that provides an interface to a JavaScript object and enables asynchronous execution of
+    /// JavaScript methods.
+    /// </summary>
+    /// <remarks>Inherits from JSObject and is typically used to invoke JavaScript functions from .NET code.
+    /// The Run method executes a JavaScript function named 'run' on the referenced object, passing the specified
+    /// argument. This class is intended for scenarios where interaction with JavaScript models is required in Blazor or
+    /// similar environments.</remarks>
+    public class Model : JSObject
+    {
+        /// <inheritdoc/>
+        public Model(IJSInProcessObjectReference _ref) : base(_ref) { }
+
+        /// <summary>
+        /// Run the model with feeds (input tensors).
+        /// </summary>
+        public Task<JSObject> Run(object feeds) => JSRef!.CallAsync<JSObject>("run", feeds);
+
+        /// <summary>
+        /// Run the model with feeds and run options.
+        /// Use options = new { preferredOutputLocation = "gpu-buffer" } to keep output on GPU.
+        /// </summary>
+        public Task<JSObject> Run(object feeds, object options) => JSRef!.CallAsync<JSObject>("run", feeds, options);
+
+        /// <summary>
+        /// Run the model with strongly-typed feeds and optional options.
+        /// </summary>
+        public Task<Dictionary<string, RuntimeTensor>> Run(Dictionary<string, RuntimeTensor> feeds, object? options = null)
+            => options == null
+                ? JSRef!.CallAsync<Dictionary<string, RuntimeTensor>>("run", feeds)
+                : JSRef!.CallAsync<Dictionary<string, RuntimeTensor>>("run", feeds, options);
+
+        /// <summary>
+        /// Gets the underlying ONNX InferenceSession.
+        /// In Transformers.js, this is model.session (the ORT session object).
+        /// </summary>
+        public JSObject Session => JSRef!.Get<JSObject>("session");
+
+        /// <summary>
+        /// Gets the model's input names (from the ONNX session).
+        /// </summary>
+        public string[] InputNames => JSRef!.Get<string[]>("session.inputNames");
+
+        /// <summary>
+        /// Gets the model's output names (from the ONNX session).
+        /// </summary>
+        public string[] OutputNames => JSRef!.Get<string[]>("session.outputNames");
+    }
+
     /// <summary>
     /// The Pipeline class is the class from which all pipelines inherit. Refer to this class for methods shared across different pipelines.<br/>
     /// https://huggingface.co/docs/transformers.js/api/pipelines#module_pipelines.Pipeline<br/>
@@ -18,6 +68,10 @@ namespace SpawnDev.BlazorJS.TransformersJS
         /// Calls JS object's dispose() method
         /// </summary>
         public void DisposeJS() => JSRef!.CallVoid("dispose");
+        /// <summary>
+        /// Gets the pipeline model session
+        /// </summary>
+        public Model Model => JS!.Get< Model>("model");
         /// <summary>
         /// Runs the pipeline _call method asynchronously
         /// </summary>

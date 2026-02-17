@@ -7,6 +7,7 @@ using SpawnDev.BlazorJS.TransformersJS.Demo;
 using SpawnDev.BlazorJS.TransformersJS.Demo.Layout;
 using SpawnDev.BlazorJS.TransformersJS.Demo.Layout.AppTray;
 using SpawnDev.BlazorJS.TransformersJS.Demo.Services;
+using SpawnDev.BlazorJS.TransformersJS.ONNX;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -31,3 +32,5 @@ builder.Services.AddScoped<MainLayoutService>();
 builder.Services.AddScoped<ThemeTrayIconService>();
 
 await builder.Build().BlazorJSRunAsync();
+
+

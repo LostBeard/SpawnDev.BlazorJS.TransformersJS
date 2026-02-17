@@ -136,6 +136,9 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Services
                     Dtype = supportsFp16 ? "fp16" : "fp32",
                 });
                 DepthEstimationPipelines[key] = depthEstimationPipeline;
+#if DEBUG
+                JS.Set("_pipeline", depthEstimationPipeline);
+#endif
                 return depthEstimationPipeline;
             }
             finally

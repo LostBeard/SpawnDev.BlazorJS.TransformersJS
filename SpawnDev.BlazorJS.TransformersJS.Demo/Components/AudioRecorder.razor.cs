@@ -326,7 +326,7 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
             mediaStreamAudioSourceNode = audioContext.CreateMediaStreamSource(stream);
             analyserNode = audioContext.CreateAnalyser();
             mediaStreamAudioSourceNode.Connect(analyserNode);
-            pcmData = new Float32Array((long)analyserNode.FFTSize);
+            pcmData = new Float32Array((long)analyserNode.FftSize);
             audioContextTimer = new Timer();
             audioContextTimer.Elapsed += AudioContextTimer_Elapsed;
             //audioContextTimer.AutoReset = false;

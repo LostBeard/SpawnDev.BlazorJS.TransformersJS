@@ -38,21 +38,21 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
         /// <summary>
         /// Dimensions of the tensor.
         /// </summary>
-        public long[] Dims => JSRef!.Get<long[]>("dims");
+        public override long[] Dims => JSRef!.Get<long[]>("dims");
         /// <summary>
         /// Type of the tensor.<br/>
         /// Example:
         /// - "float32"<br/>
         /// </summary>
-        public string Type => JSRef!.Get<string>("type");
+        public override string Type => JSRef!.Get<string>("type");
         /// <summary>
         /// DataLocation: "none" | "cpu" | "cpu-pinned" | "texture" | "gpu-buffer" | "ml-tensor"
         /// </summary>
-        public string Location => JSRef!.Get<string>("location");
+        public override string Location => JSRef!.Get<string>("location");
         /// <summary>
         /// The number of elements in the tensor.
         /// </summary>
-        public long Size => JSRef!.Get<long>("size");
+        public override long Size => JSRef!.Get<long>("size");
         /// <summary>
         /// Get the WebGPU buffer that holds the tensor data.<br/>
         /// If the data is not on GPU as WebGPU buffer, throw error.
@@ -116,5 +116,32 @@ namespace SpawnDev.BlazorJS.TransformersJS.ONNX
         /// <param name="dims">New dimensions. Size should match the old one.</param>
         /// <returns></returns>
         public virtual ONNXTensor<TData> Reshape<TData>(IEnumerable<int> dims) => JSRef!.Call<ONNXTensor<TData>>("reshape", dims)!;
+
+        /// <summary>
+        /// Create a tensor from a WebGPU buffer
+        /// https://github.com/microsoft/onnxruntime/blob/cee825d34d533ca325bfd8f8269c86133ae512e6/js/common/lib/tensor-factory.ts#L357
+        /// </summary>
+        public static ONNXTensor FromGPUBuffer(GPUBuffer buffer, TensorFromGpuBufferOptions options) => JS.Call<ONNXTensor>("ONNXTensor.fromGPUBuffer", buffer, options);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class TensorFromGpuBufferOptions
+    {
+        /// <summary>
+        /// the data type of the tensor. If omitted, assume 'float32'.
+        /// </summary>
+        public string DataType { get; set; } = "float32";
+
+        /// <summary>
+        /// the dimension of the tensor. Required.
+        /// </summary>
+        public long[] Dims { get; set; } = new long[] { 1 };
+
+        // an optional function to download the tensor data from GPU to CPU. If omitted, the GPU data will not be able to download.Usually, this is provided by a GPU backend for the inference outputs.Users don't need to provide this function.
+        // public ActionCallback Download { get; set; } = null!;
+
+        // an optional function to dispose the tensor data on GPU. If omitted, the GPU data will not be disposed. Usually, this is provided by a GPU backend for the inference outputs.Users don't need to provide this function.
+        // public ActionCallback Dispose { get; set; } = null!;
     }
 }

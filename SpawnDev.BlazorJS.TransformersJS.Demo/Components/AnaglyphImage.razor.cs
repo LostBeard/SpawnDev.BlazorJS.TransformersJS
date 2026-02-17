@@ -106,9 +106,9 @@ namespace SpawnDev.BlazorJS.TransformersJS.Demo.Components
                 anaglyphRenderer.SetDepth(depth.Width, depth.Height, depth.Data);
                 anaglyphRenderer.Render();
             }
-            catch
+            catch(Exception ex)
             {
-
+                Console.WriteLine($"Error: {ex}");
             }
             finally
             {
