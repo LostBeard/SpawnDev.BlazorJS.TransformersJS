@@ -2,7 +2,7 @@
 [![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.TransformersJS.svg?label=SpawnDev.BlazorJS.TransformersJS)](https://www.nuget.org/packages/SpawnDev.BlazorJS.TransformersJS) 
 
 ## State-of-the-art Machine Learning for the Web in Blazor WebAssembly
-`SpawnDev.BlazorJS.TrasnformersJS` brings the awesome [Transformers.js](https://github.com/huggingface/transformers.js/) library from [Hugging Face]() to Blazor WebAssembly.
+`SpawnDev.BlazorJS.TransformersJS` brings the [Transformers.js](https://github.com/huggingface/transformers.js/) library (v3.8.1) from [Hugging Face](https://huggingface.co/) to Blazor WebAssembly.
 
 Transformers.js is designed to be functionally equivalent to Hugging Face’s transformers python library, meaning you can run the same pretrained models using a very similar API. These models support common tasks in different modalities, such as:
 
@@ -29,5 +29,29 @@ The current demo app uses Transformers.js, Blazor, and WebGL.
 - [Video 2D to 3D](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/RealTimeVideo2Dto3D)
 - [Speech Recognition](https://lostbeard.github.io/SpawnDev.BlazorJS.TransformersJS/SpeechRecognition)
 
-#### WIP
+## Installation
+
+```bash
+dotnet add package SpawnDev.BlazorJS.TransformersJS
+```
+
+## Quick Start
+
+```csharp
+using SpawnDev.BlazorJS.TransformersJS;
+
+var transformers = new Transformers();
+await transformers.Init();
+
+// Create a depth estimation pipeline with WebGPU acceleration
+using var pipe = await transformers.Pipeline<DepthEstimationPipeline>(
+    "depth-estimation",
+    "onnx-community/depth-anything-v2-small",
+    new PipelineOptions { Device = "webgpu", Dtype = "fp32" });
+
+var result = await pipe._Call<DepthEstimationOutput>(imageUrl);
+```
+
+Supports WebGPU, WebGL, WebNN, and WASM execution providers. Targets .NET 8, 9, and 10.
+
 If you are interested in this project, please start an issue to suggest features or areas of interest.
